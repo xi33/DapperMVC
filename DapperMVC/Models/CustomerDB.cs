@@ -17,7 +17,7 @@ namespace DapperMVC.Models
             using (System.Data.SqlClient.SqlConnection sqlConnection = new System.Data.SqlClient.SqlConnection(Connectionstring))
             {
                 sqlConnection.Open();
-                var customer = sqlConnection.Query<Customer>("Select * from Customer");
+                var customer = sqlConnection.Query<Customer>("sELECT * FROM Customer");
                 return customer;
 
             }
