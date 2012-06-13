@@ -40,6 +40,31 @@ namespace DapperMVC.Controllers
             }
         }
 
+        public ActionResult Edit(int id)
+        {
+
+            var customerEntities = new CustomerDB();
+            return View(customerEntities.GetCustomerById(id));
+        }
+
+        //
+        // POST: /Customer/Edit/5
+
+        [HttpPost]
+        public ActionResult Edit(Customer customer)
+        {
+            try
+            {
+                // TODO: Add update logic here
+                var customerEntities = new CustomerDB();
+                customerEntities.Update(customer);
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
 
     }
 }

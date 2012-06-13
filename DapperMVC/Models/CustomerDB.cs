@@ -51,5 +51,45 @@ namespace DapperMVC.Models
             }
         }
 
+        public Customer GetCustomerById(int customerId)
+        {
+            using (System.Data.SqlClient.SqlConnection sqlConnection = new System.Data.SqlClient.SqlConnection(Connectionstring))
+            {
+                sqlConnection.Open();
+                string sqlQuery = string.Format("SELECT * FROM Customer where CustomerId = @Id");
+                var customer = sqlConnection.Query<Customer>(sqlQuery, new {Id = customerId}).SingleOrDefault();
+                return customer;
+            }
+        }
+
+        public bool Update (Customer customerEntity)
+        {
+            try
+            {
+                using (System.Data.SqlClient.SqlConnection sqlConnection = new System.Data.SqlClient.SqlConnection(Connectionstring))
+                {
+                    sqlConnection.Open();
+                    string sqlQuery =
+                        "UPDATE [dbo].[Customer] SET [FirstName] = @FirstName, [LastName] =@LastName,[Address] =@Address,[City] = @City WHERE CustomerId=@Id";
+                    sqlConnection.Execute(sqlQuery,
+                                          new
+                                              {
+                                                  customerEntity.FirstName,
+                                                  customerEntity.LastName,
+                                                  customerEntity.Address,
+                                                  customerEntity.City,
+                                                  Id = customerEntity.CustomerId
+                                              });
+                    sqlConnection.Close();
+                }
+                return true;
+
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
     }
 }
