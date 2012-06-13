@@ -23,5 +23,33 @@ namespace DapperMVC.Models
             }
         }
 
+        public string Create(Customer customerEntity)
+        {
+            try
+            {
+                using(System.Data.SqlClient.SqlConnection sqlConnection = new System.Data.SqlClient.SqlConnection(Connectionstring))
+                {
+                    sqlConnection.Open();
+                    string sqlQuery =
+                        "INSERT INTO [dbo].[Customer]([FirstName],[LastName],[Address],[City]) VALUES (@FirstName, @LastName, @Address, @City)";
+                    sqlConnection.Execute(sqlQuery,
+                                          new
+                                              {
+                                                  customerEntity.FirstName,
+                                                  customerEntity.LastName,
+                                                  customerEntity.Address,
+                                                  customerEntity.City,
+                                              });
+                    sqlConnection.Close();
+                }
+                return "Created";
+
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+
     }
 }

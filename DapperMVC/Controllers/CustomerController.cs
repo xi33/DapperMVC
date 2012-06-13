@@ -18,5 +18,28 @@ namespace DapperMVC.Controllers
             return View(customEntities.GetCustomers());
         }
 
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Create(Customer customer)
+        {
+            try
+            {
+                //TODO: add insert logic here
+                var customEntities = new CustomerDB();
+                customEntities.Create(customer);
+                return RedirectToAction("Index");
+
+            }
+            catch (Exception)
+            {
+                return View();
+            }
+        }
+
+
     }
 }
