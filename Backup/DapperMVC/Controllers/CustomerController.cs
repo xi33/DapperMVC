@@ -66,31 +66,5 @@ namespace DapperMVC.Controllers
             }
         }
 
-        public ActionResult Delete(int id)
-        {
-            var customerEntities = new CustomerDB();
-            return View(customerEntities.GetCustomerById(id));
-        }
-
-        //
-        // POST: /Customer/Delete/5
-
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                var customerEntities = new CustomerDB();
-                customerEntities.Delete(id);
-                return RedirectToAction("Index");
-
-
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
     }
 }

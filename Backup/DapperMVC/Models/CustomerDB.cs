@@ -56,7 +56,7 @@ namespace DapperMVC.Models
             using (System.Data.SqlClient.SqlConnection sqlConnection = new System.Data.SqlClient.SqlConnection(Connectionstring))
             {
                 sqlConnection.Open();
-                string sqlQuery = string.Format("SELECT * FROM Customer WHERE CustomerId = @Id");
+                string sqlQuery = string.Format("SELECT * FROM Customer where CustomerId = @Id");
                 var customer = sqlConnection.Query<Customer>(sqlQuery, new {Id = customerId}).SingleOrDefault();
                 return customer;
             }
@@ -91,24 +91,5 @@ namespace DapperMVC.Models
             }
         }
 
-        public bool Delete(int customerId)
-        {
-            try
-            {
-                using (System.Data.SqlClient.SqlConnection sqlConnection = new System.Data.SqlClient.SqlConnection(Connectionstring))
-                {
-                    sqlConnection.Open();
-                    string sqlQuery = "DELETE FROM [dbo].[Customer] WHERE CustomerId=@CustomerId";
-                    sqlConnection.Execute(sqlQuery, new { customerId });
-                    sqlConnection.Close();
-
-                }
-                return true;
-            }
-            catch (Exception exception)
-            {
-                return false;
-            }
-        }
     }
 }

@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DapperMVC", "DapperMVC\DapperMVC.csproj", "{6C3B7774-1BD9-4813-BA36-5E37F0152533}"
 EndProject
 Global
